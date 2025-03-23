@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: codesys-pod
+  namespace: {{ .Values.namespace }}
+spec:
+  replicas: {{ .Values.deployment.replicas }}
+  selector:
+    matchLabels:
+      app: codesys
+  template:
+    metadata:
+      labels:
+        app: codesys
+    spec:
+      nodeSelector:
+        vplc: {{ .Values.deployment.nodeSelector.vplc }}
+      containers:
+        - name: codesys-edge-gateway
+          image: {{ .Values.codesysEdgeGateway.image }}
+          ports:
+            - name: gateway
+              containerPort: {{ .Values.codesysEdgeGateway.containerPort }}
+          volumeMounts:
+            - name: codesys-conf-storage
+              mountPath: /conf/codesysedge
+            - name: codesys-storage
+              mountPath: /data/codesysedge
+        - name: codesys-virtual-control
+          image: {{ .Values.codesysVirtualControl.image }}
+          ports:
+            {{- range .Values.codesysVirtualControl.containerPorts }}
+            - name: {{ .name }}
+              containerPort: {{ .port }}
+            {{- end }}
+          volumeMounts:
+            - name: codesys-storage
+              mountPath: /data/codesyscontrol
+            - name: codesys-conf-storage
+              mountPath: /conf/codesyscontrol
+      volumes:
+        - name: codesys-storage
+          persistentVolumeClaim:
+            claimName: codesys-data-pvc
+        - name: codesys-conf-storage
+          persistentVolumeClaim:
+            claimName: codesys-conf-pvc
