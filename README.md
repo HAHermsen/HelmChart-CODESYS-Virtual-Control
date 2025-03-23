@@ -8,7 +8,7 @@ This helmchart currently uses
 
 
 
-  codesys-helm-chart/
+  helm-chart/
   
   ├── Chart.yaml            # Metadata about the Helm chart
   
