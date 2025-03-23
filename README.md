@@ -28,7 +28,10 @@ Grab a copy of the helm chart
 > git clone https://github.com/HAHermsen/HelmChart-CODESYS-Virtual-Control.git
 
 Go into the directory
-> cd HelmChart-CODESYS-Virtual-Control/helm-chart
+> cd HelmChart-CODESYS-Virtual-Control
+
+Create a namespace, I use codesys as namespace
+> kubectl create namespace codesys
 
 Now execute the helm script
 > helm install codesys-virtualcontrol ./helm-chart -f values.yaml --namespace codesys
