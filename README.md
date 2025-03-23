@@ -7,7 +7,6 @@ This helmchart currently uses
 > gsmartcodesys/codesysedge_edgeamd64                     (runs codesysedge_edgeamd64_4.10.0.0)
 
 
-
   helm-chart/
   
   ├── Chart.yaml            # Metadata about the Helm chart
@@ -25,7 +24,6 @@ This helmchart currently uses
   └── README.md             # Documentation and instructions for using the Helm chart
 
 
-
 Grab a copy of the helm chart
 > git clone https://github.com/HAHermsen/HelmChart-CODESYS-Virtual-Control.git
 
@@ -33,8 +31,8 @@ Go into the directory
 > cd HelmChart-CODESYS-Virtual-Control/helm-chart
 
 Now execute the helm script
-> helm install codesys-helm ./codesys-virtualcontrol-helm-chart -f values.yaml --namespace codesys
+> helm install codesys-virtualcontrol ./helm-chart -f values.yaml --namespace codesys
 
 You can override values in values.yaml by using the --set flag during the install.
 I personally run and expose the pod into my LAN, you can adjust the settings to your specific needs IP/Domain:
-> helm install codesys-helm ./helm-chart --set service.loadBalancerIP=192.168.1.100
+> helm install codesys-virtualcontrol ./helm-chart --namespace codesys --set service.loadBalancerIP=192.168.1.100
