@@ -9,7 +9,7 @@ This helmchart currently uses
 
 Run helm install to install the chart on your Kubernetes cluster.
 
-> helm install codesys-helm ./codesys-helm-chart
+> helm install HelmChart-CODESYS-Virtual-Control ./codesys-helm-chart
 
 You can override values in values.yaml by using the --set flag during the install.
 I personally run and expose the pod into my LAN, you can adjust the settings to your specific needs IP/Domain:
